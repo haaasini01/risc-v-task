@@ -1,0 +1,16 @@
+{
+  "name": "riscv-instruction-set-explorer",
+  "version": "1.0.0",
+  "description": "RISC-V Instruction Set Explorer — parses instr_dict.json, cross-references the ISA manual, and graphs extension sharing.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test":  "node tests.js",
+    "tier1": "node index.js --tier 1",
+    "tier2": "node index.js --tier 2",
+    "tier3": "node index.js --tier 3"
+  },
+  "keywords": ["riscv", "isa", "instruction-set"],
+  "license": "MIT",
+  "engines": { "node": ">=16" }
+}
