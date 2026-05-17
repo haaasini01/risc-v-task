@@ -14,8 +14,8 @@ A Node.js command-line tool that parses `instr_dict.json`, cross-references the 
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/riscv-instruction-set-explorer.git
-cd riscv-instruction-set-explorer
+git clone https://github.com/haaasini01/risc-v-task
+cd risc-v-task
 ```
 
 No `npm install` needed — zero external dependencies.
