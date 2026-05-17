@@ -11,7 +11,7 @@ const path   = require('path');
 
 const { groupByExtension, findSharedInstructions } = require('./src/parser');
 const { normalise, extractJsonExtensions, crossReference } = require('./src/crossref');
-// const { buildGraph } = require('./src/graph');
+const { buildGraph } = require('./src/graph');
 
 let passed = 0;
 let failed = 0;
@@ -19,10 +19,10 @@ let failed = 0;
 function test(name, fn) {
   try {
     fn();
-    console.log(`  ✔  ${name}`);
+    console.log(`  [pass]  ${name}`);
     passed++;
   } catch (err) {
-    console.error(`  ✘  ${name}`);
+    console.error(`  [fail]  ${name}`);
     console.error(`     ${err.message}`);
     failed++;
   }
