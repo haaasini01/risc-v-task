@@ -72,8 +72,8 @@ Each output file opens with an **Output Summary** block for quick scanning, foll
 ════════════════════════════════════════════════════════════════════════════════════
   OUTPUT SUMMARY
 ════════════════════════════════════════════════════════════════════════════════════
-Generated: 2026-05-17T10:35:11.758Z
-Output file: C:/.../sample_output_20260517_160511.txt
+Generated: 2026-05-17T13:52:52Z
+Output file: C:/.../sample_output_20260517_192252.txt
 Tier: all
 JSON source: ./instr_dict.json
 Manual source: ./riscv-isa-manual/src
@@ -91,7 +91,8 @@ Tier 2: Cross-reference summary
 Tier 3: Graph summary
   Connected nodes: 32
   Edges: 57
-  DOT file: extension_graph_20260517_160511.dot
+  DOT file: extension_graph_20260517_192252.dot
+  PNG file: extension_graph_20260517_192252.png
   Unit tests run: yes
   Tests passed: 25
   Tests failed: 0
@@ -123,8 +124,8 @@ Total instruction-extension pairs: 1396
 ════════════════════════════════════════════════════════════
   Instructions Belonging to Multiple Extensions
 ════════════════════════════════════════════════════════════
-  AES32DSI  →  rv32_zknd, rv32_zk, rv32_zkn
-  SH1ADD    →  rv_zba, rv32_zba
+  AES32DSI  ->  rv32_zknd, rv32_zk, rv32_zkn
+  SH1ADD    ->  rv_zba, rv32_zba
   ...
 Total shared instructions: 73
 ```
@@ -136,16 +137,16 @@ Total shared instructions: 73
   RISC-V Cross-Reference Report: JSON ↔ ISA Manual
 ══════════════════════════════════════════════════════════════════════
 
-✔  Matched Extensions (56)
+Matched Extensions (56)
    zba    rv_zba    Zba
    zbb    rv_zbb    Zbb
    ...
 
-✘  In JSON only — NOT found in ISA Manual (39)
+In JSON only - NOT found in ISA Manual (39)
    ssctr  (as "rv_ssctr")
    ...
 
-✘  In ISA Manual only — NOT found in JSON (19)
+In ISA Manual only - NOT found in JSON (19)
    ...
 
 Summary: 56 matched,  39 in JSON only,  19 in manual only
@@ -155,14 +156,16 @@ Summary: 56 matched,  39 in JSON only,  19 in manual only
 
 ```
   [rv_zk]
-    ──► rv_zbb   [ANDN, ORN, ROL … (+2 more)]
-    ──► rv_zbc   [CLMUL, CLMULH]
-    ──► rv_zbkb  [ANDN, ORN, PACK … (+4 more)]
+    ---> rv_zbb   [ANDN, ORN, ROL … (+2 more)]
+    ---> rv_zbc   [CLMUL, CLMULH]
+    ---> rv_zbkb  [ANDN, ORN, PACK … (+4 more)]
 
   Graph: 32 connected nodes,  57 edges
-  DOT file written → ./extension_graph_20260517_154903.dot
-  To render: dot -Tsvg extension_graph.dot -o extension_graph.svg
+  DOT file written -> ./extension_graph_20260517_154903.dot
+  PNG image written -> ./extension_graph_20260517_154903.png
 ```
+
+![Extension Sharing Graph](sample_graph.png)
 
 ---
 
@@ -172,7 +175,7 @@ Summary: 56 matched,  39 in JSON only,  19 in manual only
 node tests.js
 ```
 
-25 tests covering parsing, normalisation, cross-referencing, and graph construction — no test framework required.
+25 tests covering parsing, normalisation, cross-referencing, and graph construction - no test framework required.
 
 > Tier 3 runs unit tests automatically, so you don't need to run `node tests.js` separately when using `node index.js`.
 
@@ -182,15 +185,18 @@ node tests.js
 
 ```
 risc-v-task/
-├── index.js             # Entry point & CLI
-├── package.json
-├── tests.js             # 25 unit tests
-├── instr_dict.json      # Input — place here
+
+├── pdfs      # cv and coverLetter
 ├── riscv-isa-manual/    # Cloned ISA manual (Tier 2)
-└── src/
-    ├── parser.js        # Tier 1: parsing & grouping
+├── src/
     ├── crossref.js      # Tier 2: normalisation & cross-reference
-    └── graph.js         # Tier 3: graph building & DOT rendering
+    ├── graph.js         # Tier 3: graph building, DOT & PNG rendering
+    └── parser.js        # Tier 1: parsing & grouping
+├── index.js             # Entry point & CLI
+├── instr_dict.json      # Input — place here
+├── package.json
+├── README.md
+└── tests.js             # 25 unit tests
 ```
 
 ---
@@ -209,4 +215,7 @@ The `.adoc` files are scanned with a regex matching:
 This is intentionally broad and may produce some false positives in the "manual only" list.
 
 **Graph filtering (Tier 3)**
-Only extensions sharing ≥2 instructions appear as nodes. Isolated extensions are omitted to keep the graph readable.
+Only extensions sharing ≥1 instructions appear as nodes. Isolated extensions are omitted to keep the graph readable.
+
+**PNG auto-rendering (Tier 3)**
+After writing the DOT file, `graph.js` immediately shells out to `dot -Tpng` to produce a PNG alongside it. This requires Graphviz to be installed but degrades gracefully — if `dot` is not found, a warning is printed and the run continues normally.
