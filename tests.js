@@ -193,45 +193,45 @@ test('crossReference: result arrays are sorted by key', () => {
   assert.deepStrictEqual(keys, [...keys].sort());
 });
 
-// // ── Graph tests ───────────────────────────────────────────────────────────────
+// ── Graph tests ───────────────────────────────────────────────────────────────
 
-// console.log('\n── Graph Tests ──────────────────────────────────────────────────────');
+console.log('\n── Graph Tests ──────────────────────────────────────────────────────');
 
-// test('buildGraph: nodes created for multi-extension instructions', () => {
-//   const { adjacency } = buildGraph(SAMPLE_DICT);
-//   assert.ok(adjacency.has('rv_zba'),   'rv_zba should be a node');
-//   assert.ok(adjacency.has('rv32_zba'), 'rv32_zba should be a node');
-//   assert.ok(adjacency.has('rv32_zknd'),'rv32_zknd should be a node');
-// });
+test('buildGraph: nodes created for multi-extension instructions', () => {
+  const { adjacency } = buildGraph(SAMPLE_DICT);
+  assert.ok(adjacency.has('rv_zba'),   'rv_zba should be a node');
+  assert.ok(adjacency.has('rv32_zba'), 'rv32_zba should be a node');
+  assert.ok(adjacency.has('rv32_zknd'),'rv32_zknd should be a node');
+});
 
-// test('buildGraph: single-extension instructions do not add nodes', () => {
-//   const { adjacency } = buildGraph(SAMPLE_DICT);
-//   // ADD is only in rv_i, so rv_i should not appear
-//   assert.ok(!adjacency.has('rv_i'), 'rv_i should not be a node (only single-ext instrs)');
-//   assert.ok(!adjacency.has('rv_f'), 'rv_f should not be a node');
-// });
+test('buildGraph: single-extension instructions do not add nodes', () => {
+  const { adjacency } = buildGraph(SAMPLE_DICT);
+  // ADD is only in rv_i, so rv_i should not appear
+  assert.ok(!adjacency.has('rv_i'), 'rv_i should not be a node (only single-ext instrs)');
+  assert.ok(!adjacency.has('rv_f'), 'rv_f should not be a node');
+});
 
-// test('buildGraph: edges are bidirectional', () => {
-//   const { adjacency } = buildGraph(SAMPLE_DICT);
-//   assert.ok(adjacency.get('rv_zba')?.has('rv32_zba'), 'rv_zba -> rv32_zba edge');
-//   assert.ok(adjacency.get('rv32_zba')?.has('rv_zba'), 'rv32_zba -> rv_zba edge (reverse)');
-// });
+test('buildGraph: edges are bidirectional', () => {
+  const { adjacency } = buildGraph(SAMPLE_DICT);
+  assert.ok(adjacency.get('rv_zba')?.has('rv32_zba'), 'rv_zba -> rv32_zba edge');
+  assert.ok(adjacency.get('rv32_zba')?.has('rv_zba'), 'rv32_zba -> rv_zba edge (reverse)');
+});
 
-// test('buildGraph: sharedDetails edge key is sorted', () => {
-//   const { sharedDetails } = buildGraph(SAMPLE_DICT);
-//   for (const key of sharedDetails.keys()) {
-//     const [a, b] = key.split('||');
-//     assert.ok(a <= b, `Edge key "${key}" must be in sorted order`);
-//   }
-// });
+test('buildGraph: sharedDetails edge key is sorted', () => {
+  const { sharedDetails } = buildGraph(SAMPLE_DICT);
+  for (const key of sharedDetails.keys()) {
+    const [a, b] = key.split('||');
+    assert.ok(a <= b, `Edge key "${key}" must be in sorted order`);
+  }
+});
 
-// test('buildGraph: correct mnemonic recorded for edge', () => {
-//   const { sharedDetails } = buildGraph(SAMPLE_DICT);
-//   const edgeKey = ['rv_zba', 'rv32_zba'].sort().join('||');
-//   const mnemonics = sharedDetails.get(edgeKey);
-//   assert.ok(Array.isArray(mnemonics),         'mnemonics should be an array');
-//   assert.ok(mnemonics.includes('SH1ADD'),     'SH1ADD should be on the rv_zba/rv32_zba edge');
-// });
+test('buildGraph: correct mnemonic recorded for edge', () => {
+  const { sharedDetails } = buildGraph(SAMPLE_DICT);
+  const edgeKey = ['rv_zba', 'rv32_zba'].sort().join('||');
+  const mnemonics = sharedDetails.get(edgeKey);
+  assert.ok(Array.isArray(mnemonics),         'mnemonics should be an array');
+  assert.ok(mnemonics.includes('SH1ADD'),     'SH1ADD should be on the rv_zba/rv32_zba edge');
+});
 
 // ── Results ───────────────────────────────────────────────────────────────────
 
