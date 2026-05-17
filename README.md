@@ -53,6 +53,33 @@ node index.js --tier 3    # Tier 3: extension sharing graph only
 node index.js --json /path/to/instr_dict.json --manual /path/to/riscv-isa-manual/src
 ```
 
+Note: Running `node index.js` now writes all program output into a timestamped file in the project root. The output filename format is:
+
+```
+sample_output_YYYYMMDD_HHMMSS.txt
+```
+
+Each output file begins with a compact "OUTPUT SUMMARY" block (generated time, tier run, counts for each tier, and any errors), followed by the full detailed output. This makes it easy to scan summary information without scrolling.
+
+Tier 3 now additionally runs the built-in unit tests (`tests.js`) as part of its run and includes the test results in the Tier 3 section of the output summary. The graph DOT file written by Tier 3 is also timestamped using the same timestamp and written as:
+
+```
+extension_graph_YYYYMMDD_HHMMSS.dot
+```
+
+Examples:
+
+```
+# Run everything (Tier 1+2+3). This writes a sample_output_<ts>.txt and extension_graph_<ts>.dot
+node index.js
+
+# Run Tier 1 only (parsing & summaries)
+node index.js --tier 1
+
+# Run Tier 3 (graph + unit tests)
+node index.js --tier 3
+```
+
 ### npm shorthand scripts
 
 ```bash
