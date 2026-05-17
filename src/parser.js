@@ -105,7 +105,7 @@ function printSharedInstructions(shared) {
   } else {
     for (const { mnemonic, extensions } of shared) {
       console.log(`  ${mnemonic}`);
-      console.log(`    → ${extensions.join(', ')}`);
+      console.log(`    -> ${extensions.join(', ')}`);
     }
   }
 

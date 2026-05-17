@@ -158,7 +158,7 @@ function printCrossRefReport({ matched, jsonOnly, manualOnly }) {
   console.log('═'.repeat(70));
 
   // -- MATCHED --
-  console.log(`\n✔  Matched Extensions (${matched.length})`);
+  console.log(`\nMatched Extensions (${matched.length})`);
   console.log('─'.repeat(70));
   console.log(
     padRight('Normalised Key', 18) +
@@ -175,7 +175,7 @@ function printCrossRefReport({ matched, jsonOnly, manualOnly }) {
   }
 
   // -- JSON ONLY --
-  console.log(`\n✘  In JSON only — NOT found in ISA Manual (${jsonOnly.length})`);
+  console.log(`\nIn JSON only — NOT found in ISA Manual (${jsonOnly.length})`);
   console.log('─'.repeat(70));
   if (jsonOnly.length === 0) {
     console.log('  (none)');
@@ -186,7 +186,7 @@ function printCrossRefReport({ matched, jsonOnly, manualOnly }) {
   }
 
   // -- MANUAL ONLY --
-  console.log(`\n✘  In ISA Manual only — NOT found in JSON (${manualOnly.length})`);
+  console.log(`\nIn ISA Manual only — NOT found in JSON (${manualOnly.length})`);
   console.log('─'.repeat(70));
   if (manualOnly.length === 0) {
     console.log('  (none)');
