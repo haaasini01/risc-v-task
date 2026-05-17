@@ -3,6 +3,24 @@ graph extension_sharing {
   node [shape=box, style=filled, fillcolor=lightyellow, fontname=Helvetica];
   edge [fontname=Helvetica, fontsize=9];
 
+  subgraph cluster_legend {
+    label="Legend";
+    fontname=Helvetica;
+    fontsize=11;
+    style=filled;
+    fillcolor=lightyellow;
+    color=gray50;
+    margin=12;
+
+    legend_ext_a [label="Extension A", shape=box, style=filled, fillcolor=lightyellow, fontname=Helvetica, fontsize=10];
+    legend_ext_b [label="Extension B", shape=box, style=filled, fillcolor=lightyellow, fontname=Helvetica, fontsize=10];
+    legend_ext_a -- legend_ext_b [label="INSTR1,INSTR2+N", fontsize=9, style=dashed, color=gray40];
+
+    legend_node_desc  [shape=plain, label="Node  = a RISC-V extension (e.g. rv_zbb)", fontname=Helvetica, fontsize=9];
+    legend_edge_desc  [shape=plain, label="Edge  = two extensions share ≥1 instruction mnemonic", fontname=Helvetica, fontsize=9];
+    legend_label_desc [shape=plain, label="Label = first 2 shared mnemonics, +N = additional count", fontname=Helvetica, fontsize=9];
+  }
+
   rv32_zk [label="rv32_zk"];
   rv32_zkn [label="rv32_zkn"];
   rv32_zknd [label="rv32_zknd"];

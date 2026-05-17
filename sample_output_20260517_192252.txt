@@ -1,8 +1,8 @@
 ════════════════════════════════════════════════════════════════════════════════════
   OUTPUT SUMMARY
 ════════════════════════════════════════════════════════════════════════════════════
-Generated: 2026-05-17T10:35:11.758Z
-Output file: C:\Users\kandu\OneDrive\Desktop\risc_v\sample_output_20260517_160511.txt
+Generated: 2026-05-17T13:52:52.814Z
+Output file: C:\Users\kandu\OneDrive\Desktop\risc_v\sample_output_20260517_192252.txt
 Tier: all
 JSON source: ./instr_dict.json
 Manual source: ./riscv-isa-manual/src
@@ -20,15 +20,16 @@ Tier 2: Cross-reference summary
 Tier 3: Graph summary
   Connected nodes: 32
   Edges: 57
-  DOT file: C:\Users\kandu\OneDrive\Desktop\risc_v\extension_graph_20260517_160511.dot
+  DOT file: C:\Users\kandu\OneDrive\Desktop\risc_v\extension_graph_20260517_192252.dot
+  PNG file: C:\Users\kandu\OneDrive\Desktop\risc_v\extension_graph_20260517_192252.png
   Unit tests run: yes
-  Tests passed: 20
+  Tests passed: 25
   Tests failed: 0
 
 ════════════════════════════════════════════════════════════════════════════════════
 
 
-🔬  RISC-V Instruction Set Explorer
+RISC-V Instruction Set Explorer
     JSON  : ./instr_dict.json
     Manual: ./riscv-isa-manual/src
     Tier  : all
@@ -163,151 +164,151 @@ Total instruction-extension pairs: 1343
   Instructions Belonging to Multiple Extensions
 ════════════════════════════════════════════════════════════
   AES32DSI
-    → rv32_zknd, rv32_zk, rv32_zkn
+    -> rv32_zknd, rv32_zk, rv32_zkn
   AES32DSMI
-    → rv32_zknd, rv32_zk, rv32_zkn
+    -> rv32_zknd, rv32_zk, rv32_zkn
   AES32ESI
-    → rv32_zkne, rv32_zk, rv32_zkn
+    -> rv32_zkne, rv32_zk, rv32_zkn
   AES32ESMI
-    → rv32_zkne, rv32_zk, rv32_zkn
+    -> rv32_zkne, rv32_zk, rv32_zkn
   AES64DS
-    → rv64_zknd, rv64_zkn, rv64_zk
+    -> rv64_zknd, rv64_zkn, rv64_zk
   AES64DSM
-    → rv64_zknd, rv64_zkn, rv64_zk
+    -> rv64_zknd, rv64_zkn, rv64_zk
   AES64ES
-    → rv64_zkne, rv64_zkn, rv64_zk
+    -> rv64_zkne, rv64_zkn, rv64_zk
   AES64ESM
-    → rv64_zkne, rv64_zkn, rv64_zk
+    -> rv64_zkne, rv64_zkn, rv64_zk
   AES64IM
-    → rv64_zknd, rv64_zkn, rv64_zk
+    -> rv64_zknd, rv64_zkn, rv64_zk
   AES64KS1I
-    → rv64_zknd, rv64_zkn, rv64_zkne, rv64_zk
+    -> rv64_zknd, rv64_zkn, rv64_zkne, rv64_zk
   AES64KS2
-    → rv64_zknd, rv64_zkn, rv64_zkne, rv64_zk
+    -> rv64_zknd, rv64_zkn, rv64_zkne, rv64_zk
   ANDN
-    → rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
+    -> rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
   CLMUL
-    → rv_zbc, rv_zkn, rv_zks, rv_zk, rv_zbkc
+    -> rv_zbc, rv_zkn, rv_zks, rv_zk, rv_zbkc
   CLMULH
-    → rv_zbc, rv_zkn, rv_zks, rv_zk, rv_zbkc
+    -> rv_zbc, rv_zkn, rv_zks, rv_zk, rv_zbkc
   ORN
-    → rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
+    -> rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
   PACK
-    → rv_zbkb, rv_zkn, rv_zks, rv_zk
+    -> rv_zbkb, rv_zkn, rv_zks, rv_zk
   PACKH
-    → rv_zbkb, rv_zkn, rv_zks, rv_zk
+    -> rv_zbkb, rv_zkn, rv_zks, rv_zk
   PACKW
-    → rv64_zbkb, rv64_zks, rv64_zkn, rv64_zk
+    -> rv64_zbkb, rv64_zks, rv64_zkn, rv64_zk
   ROL
-    → rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
+    -> rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
   ROLW
-    → rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
+    -> rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
   ROR
-    → rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
+    -> rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
   RORI
-    → rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
+    -> rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
   RORIW
-    → rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
+    -> rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
   RORW
-    → rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
+    -> rv64_zbb, rv64_zks, rv64_zkn, rv64_zk, rv64_zbkb
   SHA256SIG0
-    → rv_zknh, rv_zkn, rv_zk
+    -> rv_zknh, rv_zkn, rv_zk
   SHA256SIG1
-    → rv_zknh, rv_zkn, rv_zk
+    -> rv_zknh, rv_zkn, rv_zk
   SHA256SUM0
-    → rv_zknh, rv_zkn, rv_zk
+    -> rv_zknh, rv_zkn, rv_zk
   SHA256SUM1
-    → rv_zknh, rv_zkn, rv_zk
+    -> rv_zknh, rv_zkn, rv_zk
   SHA512SIG0
-    → rv64_zknh, rv64_zkn, rv64_zk
+    -> rv64_zknh, rv64_zkn, rv64_zk
   SHA512SIG0H
-    → rv32_zknh, rv32_zk, rv32_zkn
+    -> rv32_zknh, rv32_zk, rv32_zkn
   SHA512SIG0L
-    → rv32_zknh, rv32_zk, rv32_zkn
+    -> rv32_zknh, rv32_zk, rv32_zkn
   SHA512SIG1
-    → rv64_zknh, rv64_zkn, rv64_zk
+    -> rv64_zknh, rv64_zkn, rv64_zk
   SHA512SIG1H
-    → rv32_zknh, rv32_zk, rv32_zkn
+    -> rv32_zknh, rv32_zk, rv32_zkn
   SHA512SIG1L
-    → rv32_zknh, rv32_zk, rv32_zkn
+    -> rv32_zknh, rv32_zk, rv32_zkn
   SHA512SUM0
-    → rv64_zknh, rv64_zkn, rv64_zk
+    -> rv64_zknh, rv64_zkn, rv64_zk
   SHA512SUM0R
-    → rv32_zknh, rv32_zk, rv32_zkn
+    -> rv32_zknh, rv32_zk, rv32_zkn
   SHA512SUM1
-    → rv64_zknh, rv64_zkn, rv64_zk
+    -> rv64_zknh, rv64_zkn, rv64_zk
   SHA512SUM1R
-    → rv32_zknh, rv32_zk, rv32_zkn
+    -> rv32_zknh, rv32_zk, rv32_zkn
   SM3P0
-    → rv_zksh, rv_zks
+    -> rv_zksh, rv_zks
   SM3P1
-    → rv_zksh, rv_zks
+    -> rv_zksh, rv_zks
   SM4ED
-    → rv_zksed, rv_zks
+    -> rv_zksed, rv_zks
   SM4KS
-    → rv_zksed, rv_zks
+    -> rv_zksed, rv_zks
   VAESDF_VS
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESDF_VV
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESDM_VS
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESDM_VV
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESEF_VS
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESEF_VV
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESEM_VS
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESEM_VV
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESKF1_VI
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESKF2_VI
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VAESZ_VS
-    → rv_zvkned, rv_zvkn
+    -> rv_zvkned, rv_zvkn
   VANDN_VV
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VANDN_VX
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VBREV8_V
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VREV8_V
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VROL_VV
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VROL_VX
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VROR_VI
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VROR_VV
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VROR_VX
-    → rv_zvbb, rv_zvks, rv_zvkn
+    -> rv_zvbb, rv_zvks, rv_zvkn
   VSHA2CH_VV
-    → rv_zvknha, rv_zvknhb, rv_zvkn
+    -> rv_zvknha, rv_zvknhb, rv_zvkn
   VSHA2CL_VV
-    → rv_zvknha, rv_zvknhb, rv_zvkn
+    -> rv_zvknha, rv_zvknhb, rv_zvkn
   VSHA2MS_VV
-    → rv_zvknha, rv_zvknhb, rv_zvkn
+    -> rv_zvknha, rv_zvknhb, rv_zvkn
   VSM3C_VI
-    → rv_zvksh, rv_zvks
+    -> rv_zvksh, rv_zvks
   VSM3ME_VV
-    → rv_zvksh, rv_zvks
+    -> rv_zvksh, rv_zvks
   VSM4K_VI
-    → rv_zvksed, rv_zvks
+    -> rv_zvksed, rv_zvks
   VSM4R_VS
-    → rv_zvksed, rv_zvks
+    -> rv_zvksed, rv_zvks
   VSM4R_VV
-    → rv_zvksed, rv_zvks
+    -> rv_zvksed, rv_zvks
   XNOR
-    → rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
+    -> rv_zbb, rv_zkn, rv_zks, rv_zk, rv_zbkb
   XPERM4
-    → rv_zbkx, rv_zkn, rv_zks, rv_zk
+    -> rv_zbkx, rv_zkn, rv_zks, rv_zk
   XPERM8
-    → rv_zbkx, rv_zkn, rv_zks, rv_zk
+    -> rv_zbkx, rv_zkn, rv_zks, rv_zk
 ────────────────────────────────────────────────────────────
 Total shared instructions: 73
 ════════════════════════════════════════════════════════════
@@ -320,7 +321,7 @@ Total shared instructions: 73
   RISC-V Cross-Reference Report: JSON ↔ ISA Manual
 ══════════════════════════════════════════════════════════════════════
 
-✔  Matched Extensions (51)
+Matched Extensions (51)
 ──────────────────────────────────────────────────────────────────────
 Normalised Key    In JSON as            In Manual as
 ──────────────────────────────────────────────────────────────────────
@@ -376,7 +377,7 @@ zvks              rv_zvks               Zvks
 zvksed            rv_zvksed             Zvksed
 zvksh             rv_zvksh              Zvksh
 
-✘  In JSON only — NOT found in ISA Manual (34)
+In JSON only — NOT found in ISA Manual (34)
 ──────────────────────────────────────────────────────────────────────
   c_d                (as "rv_c_d")
   c_f                (as "rv32_c_f")
@@ -413,7 +414,7 @@ zvksh             rv_zvksh              Zvksh
   zvqldot8i          (as "rv_zvqldot8i")
   zvzip              (as "rv_zvzip")
 
-✘  In ISA Manual only — NOT found in JSON (106)
+In ISA Manual only — NOT found in JSON (106)
 ──────────────────────────────────────────────────────────────────────
   a20                (as "RVA20")
   a20s64             (as "RVA20S64")
@@ -715,36 +716,44 @@ zvksh             rv_zvksh              Zvksh
   Graph: 32 connected nodes,  57 edges
 ══════════════════════════════════════════════════════════════════════
 
-  Graphviz DOT file written → C:\Users\kandu\OneDrive\Desktop\risc_v\extension_graph_20260517_160511.dot
+  Graphviz DOT file written → C:\Users\kandu\OneDrive\Desktop\risc_v\extension_graph_20260517_192252.dot
   To render: dot -Tsvg extension_graph.dot -o extension_graph.svg
 
+  PNG image written      → C:\Users\kandu\OneDrive\Desktop\risc_v\extension_graph_20260517_192252.png
 ── Unit tests (Tier 3) ───────────────────────────────────────────────
 ── Parser Tests ─────────────────────────────────────────────────────
-  ✔  groupByExtension: basic grouping
-  ✔  groupByExtension: instruction with 2 extensions appears in both groups
-  ✔  groupByExtension: instruction with 3 extensions appears in all 3 groups
-  ✔  groupByExtension: instruction with missing extension key is safely ignored
-  ✔  groupByExtension: result is sorted by extension name
-  ✔  findSharedInstructions: finds multi-extension instructions
-  ✔  findSharedInstructions: single-extension instructions not included
-  ✔  findSharedInstructions: result is sorted by mnemonic
-  ✔  findSharedInstructions: extension list is preserved
+  [pass]  groupByExtension: basic grouping
+  [pass]  groupByExtension: instruction with 2 extensions appears in both groups
+  [pass]  groupByExtension: instruction with 3 extensions appears in all 3 groups
+  [pass]  groupByExtension: instruction with missing extension key is safely ignored
+  [pass]  groupByExtension: result is sorted by extension name
+  [pass]  findSharedInstructions: finds multi-extension instructions
+  [pass]  findSharedInstructions: single-extension instructions not included
+  [pass]  findSharedInstructions: result is sorted by mnemonic
+  [pass]  findSharedInstructions: extension list is preserved
 
 ── Normalisation Tests ──────────────────────────────────────────────
-  ✔  normalise: strips rv_ prefix
-  ✔  normalise: strips rv32_ prefix
-  ✔  normalise: strips rv64_ prefix
-  ✔  normalise: lowercases manual-style tokens
-  ✔  normalise: rv32 and rv64 variants map to same key as plain
+  [pass]  normalise: strips rv_ prefix
+  [pass]  normalise: strips rv32_ prefix
+  [pass]  normalise: strips rv64_ prefix
+  [pass]  normalise: lowercases manual-style tokens
+  [pass]  normalise: rv32 and rv64 variants map to same key as plain
 
 ── Cross-Reference Tests ────────────────────────────────────────────
-  ✔  extractJsonExtensions: correct normalised keys
-  ✔  crossReference: matched when normalised keys coincide
-  ✔  crossReference: jsonOnly contains correct entry
-  ✔  crossReference: manualOnly contains correct entry
-  ✔  crossReference: empty inputs produce empty results
-  ✔  crossReference: result arrays are sorted by key
+  [pass]  extractJsonExtensions: correct normalised keys
+  [pass]  crossReference: matched when normalised keys coincide
+  [pass]  crossReference: jsonOnly contains correct entry
+  [pass]  crossReference: manualOnly contains correct entry
+  [pass]  crossReference: empty inputs produce empty results
+  [pass]  crossReference: result arrays are sorted by key
+
+── Graph Tests ──────────────────────────────────────────────────────
+  [pass]  buildGraph: nodes created for multi-extension instructions
+  [pass]  buildGraph: single-extension instructions do not add nodes
+  [pass]  buildGraph: edges are bidirectional
+  [pass]  buildGraph: sharedDetails edge key is sorted
+  [pass]  buildGraph: correct mnemonic recorded for edge
 
 ══════════════════════════════════════════════════
-  Results: 20 passed,  0 failed
+  Results: 25 passed,  0 failed
 ══════════════════════════════════════════════════
