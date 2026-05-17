@@ -172,7 +172,7 @@ Summary: 56 matched,  39 in JSON only,  19 in manual only
 node tests.js
 ```
 
-20 tests covering parsing, normalisation, cross-referencing, and graph construction — no test framework required.
+25 tests covering parsing, normalisation, cross-referencing, and graph construction — no test framework required.
 
 > Tier 3 runs unit tests automatically, so you don't need to run `node tests.js` separately when using `node index.js`.
 
@@ -184,7 +184,7 @@ node tests.js
 risc-v-task/
 ├── index.js             # Entry point & CLI
 ├── package.json
-├── tests.js             # 20 unit tests
+├── tests.js             # 25 unit tests
 ├── instr_dict.json      # Input — place here
 ├── riscv-isa-manual/    # Cloned ISA manual (Tier 2)
 └── src/
