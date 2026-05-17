@@ -103,6 +103,9 @@ function writeOutputFile(outputPath, buffer, summary) {
     if (summary.tier3.dotFile) {
       lines.push(`  DOT file: ${summary.tier3.dotFile}`);
     }
+    if (summary.tier3.pngFile) {
+      lines.push(`  PNG file: ${summary.tier3.pngFile}`);
+    }
     lines.push(`  Unit tests run: ${summary.tier3.tests.executed ? 'yes' : 'no'}`);
     if (summary.tier3.tests.executed) {
       lines.push(`  Tests passed: ${summary.tier3.tests.passed}`);
@@ -130,7 +133,8 @@ const { loadInstrDict, groupByExtension, findSharedInstructions,
 const { extractJsonExtensions, extractManualExtensions,
         crossReference, printCrossRefReport }         = require('./src/crossref');
 
-const { buildGraph, printTextGraph, writeDotFile }    = require('./src/graph');
+const { buildGraph, printTextGraph, writeDotFile,
+        convertDotToPng }                             = require('./src/graph');
 
 // ── CLI argument parsing ──────────────────────────────────────────────────────
 
@@ -178,9 +182,14 @@ function main() {
     summary.errors.push(message);
   };
 
-  originalConsoleLog(`Writing output to file: ${outputPath}`);
+  originalConsoleLog(`Output file:            ${outputPath}`);
+  if (runTier3) {
+    originalConsoleLog(`Graph DOT file:         ${dotOutputPath}`);
+    originalConsoleLog(`Graph PNG file:         ${dotOutputPath.replace(/\.dot$/, '.png')}`);
+  }
 
-  writeLine('\n🔬  RISC-V Instruction Set Explorer');
+
+  writeLine('\nRISC-V Instruction Set Explorer');
   writeLine(`    JSON  : ${args.json}`);
   writeLine(`    Manual: ${args.manual}`);
   writeLine(`    Tier  : ${args.tier}\n`);
@@ -252,6 +261,15 @@ function main() {
     summary.tier3.edges = sharedDetails.size;
     printTextGraph(adjacency, sharedDetails);
     writeDotFile(adjacency, sharedDetails, dotOutputPath);
+
+    // Convert the DOT file to a PNG image immediately after writing it
+    let pngOutputPath;
+    try {
+      pngOutputPath = convertDotToPng(dotOutputPath);
+      summary.tier3.pngFile = pngOutputPath;
+    } catch (err) {
+      console.error(`WARNING: PNG conversion skipped — ${err.message}`);
+    }
 
     const testReport = runTests();
     summary.tier3.tests = {

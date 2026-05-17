@@ -106,7 +106,27 @@ function writeDotFile(adjacency, sharedDetails, outputPath) {
   lines.push('  edge [fontname=Helvetica, fontsize=9];');
   lines.push('');
 
-  // Nodes
+  // ── Legend ─────────────────────────────────────────────────────────────────
+  lines.push('  subgraph cluster_legend {');
+  lines.push('    label="Legend";');
+  lines.push('    fontname=Helvetica;');
+  lines.push('    fontsize=11;');
+  lines.push('    style=filled;');
+  lines.push('    fillcolor=lightyellow;');
+  lines.push('    color=gray50;');
+  lines.push('    margin=12;');
+  lines.push('');
+  lines.push('    legend_ext_a [label="Extension A", shape=box, style=filled, fillcolor=lightyellow, fontname=Helvetica, fontsize=10];');
+  lines.push('    legend_ext_b [label="Extension B", shape=box, style=filled, fillcolor=lightyellow, fontname=Helvetica, fontsize=10];');
+  lines.push('    legend_ext_a -- legend_ext_b [label="INSTR1,INSTR2+N", fontsize=9, style=dashed, color=gray40];');
+  lines.push('');
+  lines.push('    legend_node_desc  [shape=plain, label="Node  = a RISC-V extension (e.g. rv_zbb)", fontname=Helvetica, fontsize=9];');
+  lines.push('    legend_edge_desc  [shape=plain, label="Edge  = two extensions share \u22651 instruction mnemonic", fontname=Helvetica, fontsize=9];');
+  lines.push('    legend_label_desc [shape=plain, label="Label = first 2 shared mnemonics, +N = additional count", fontname=Helvetica, fontsize=9];');
+  lines.push('  }');
+  lines.push('');
+
+  // ── Nodes ──────────────────────────────────────────────────────────────────
   for (const node of [...adjacency.keys()].sort()) {
     const safe = node.replace(/[^a-zA-Z0-9_]/g, '_');
     lines.push(`  ${safe} [label="${node}"];`);
@@ -114,7 +134,7 @@ function writeDotFile(adjacency, sharedDetails, outputPath) {
 
   lines.push('');
 
-  // Edges (avoid duplicates by only emitting a < b)
+  // ── Edges (avoid duplicates by only emitting a < b) ────────────────────────
   const emitted = new Set();
   for (const [edgeKey, mnemonics] of [...sharedDetails.entries()].sort()) {
     if (emitted.has(edgeKey)) continue;
@@ -135,4 +155,42 @@ function writeDotFile(adjacency, sharedDetails, outputPath) {
   console.log('  To render: dot -Tsvg extension_graph.dot -o extension_graph.svg\n');
 }
 
-module.exports = { buildGraph, printTextGraph, writeDotFile };
+// ── PNG conversion ────────────────────────────────────────────────────────────
+
+/**
+ * Convert a Graphviz DOT file to a PNG image using the system `dot` binary.
+ *
+ * The PNG is written alongside the DOT file with the same base name.
+ * e.g. extension_graph_20260517_160511.dot → extension_graph_20260517_160511.png
+ *
+ * @param {string} dotPath  Absolute or relative path to the .dot file
+ * @returns {string}        Path of the generated PNG file
+ * @throws {Error}          If the `dot` binary is not found or rendering fails
+ */
+function convertDotToPng(dotPath) {
+  const child_process = require('child_process');
+
+  const pngPath = dotPath.replace(/\.dot$/i, '.png');
+
+  try {
+    child_process.execFileSync('dot', ['-Tpng', dotPath, '-o', pngPath], {
+      encoding: 'utf8',
+      maxBuffer: 50 * 1024 * 1024,
+    });
+  } catch (err) {
+    if (err.code === 'ENOENT') {
+      throw new Error(
+        'Graphviz `dot` binary not found. ' +
+        'Install it with:  sudo apt install graphviz  (Debian/Ubuntu)\n' +
+        '                  brew install graphviz       (macOS)\n' +
+        '                  choco install graphviz      (Windows)'
+      );
+    }
+    throw new Error(`dot rendering failed: ${err.stderr || err.message}`);
+  }
+
+  console.log(`  PNG image written      → ${pngPath}`);
+  return pngPath;
+}
+
+module.exports = { buildGraph, printTextGraph, writeDotFile, convertDotToPng };
