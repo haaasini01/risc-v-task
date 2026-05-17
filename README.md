@@ -1,13 +1,15 @@
 # RISC-V Instruction Set Explorer
 
-A Node.js command-line tool that parses `instr_dict.json`, cross-references the RISC-V ISA manual, and graphs extension sharing relationships.
+A Node.js CLI tool that parses `instr_dict.json`, cross-references the RISC-V ISA manual, and visualizes extension sharing relationships — across three tiers.
 
 ---
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) v16 or newer (no npm packages required — only Node built-ins are used)
-- [Git](https://git-scm.com/) (to clone the ISA manual for Tier 2)
+- [Node.js](https://nodejs.org/) v16 or newer
+- [Git](https://git-scm.com/) (for cloning the ISA manual in Tier 2)
+
+No external npm packages required — only Node built-ins are used.
 
 ---
 
@@ -18,10 +20,7 @@ git clone https://github.com/haaasini01/risc-v-task
 cd risc-v-task
 ```
 
-No `npm install` needed — zero external dependencies.
-
-Place `instr_dict.json` in the project root (from the
-[riscv-extensions-landscape](https://github.com/rpsene/riscv-extensions-landscape) repo).
+Place `instr_dict.json` in the project root (from the [riscv-extensions-landscape](https://github.com/rpsene/riscv-extensions-landscape) repo).
 
 For Tier 2, clone the ISA manual into the project root:
 
@@ -33,76 +32,72 @@ git clone --depth=1 https://github.com/riscv/riscv-isa-manual.git
 
 ## Running
 
-### All tiers at once (default)
-
 ```bash
-node index.js
+node index.js              # Run all tiers (default)
+node index.js --tier 1     # Tier 1: parsing & grouping only
+node index.js --tier 2     # Tier 2: cross-reference only
+node index.js --tier 3     # Tier 3: extension sharing graph + unit tests
 ```
 
-### Individual tiers
-
-```bash
-node index.js --tier 1    # Tier 1: parsing & grouping only
-node index.js --tier 2    # Tier 2: cross-reference only
-node index.js --tier 3    # Tier 3: extension sharing graph only
-```
-
-### Custom paths
+Custom paths:
 
 ```bash
 node index.js --json /path/to/instr_dict.json --manual /path/to/riscv-isa-manual/src
 ```
 
-Note: Running `node index.js` now writes all program output into a timestamped file in the project root. The output filename format is:
-
-```
-sample_output_YYYYMMDD_HHMMSS.txt
-```
-
-Each output file begins with a compact "OUTPUT SUMMARY" block (generated time, tier run, counts for each tier, and any errors), followed by the full detailed output. This makes it easy to scan summary information without scrolling.
-
-Tier 3 now additionally runs the built-in unit tests (`tests.js`) as part of its run and includes the test results in the Tier 3 section of the output summary. The graph DOT file written by Tier 3 is also timestamped using the same timestamp and written as:
-
-```
-extension_graph_YYYYMMDD_HHMMSS.dot
-```
-
-Examples:
-
-```
-# Run everything (Tier 1+2+3). This writes a sample_output_<ts>.txt and extension_graph_<ts>.dot
-node index.js
-
-# Run Tier 1 only (parsing & summaries)
-node index.js --tier 1
-
-# Run Tier 3 (graph + unit tests)
-node index.js --tier 3
-```
-
 ### npm shorthand scripts
 
 ```bash
-npm start          # all tiers
-npm test           # unit tests
+npm start        # All tiers
 npm run tier1
 npm run tier2
 npm run tier3
+npm test         # Unit tests only
 ```
-
----
-
-## Unit Tests
-
-```bash
-node tests.js
-```
-
-Runs 25 tests covering parsing, normalisation, cross-referencing, and graph construction — no test framework required.
 
 ---
 
 ## Sample Output
+
+Every run writes two timestamped files to the project root:
+
+- `sample_output_YYYYMMDD_HHMMSS.txt` — full program output
+- `extension_graph_YYYYMMDD_HHMMSS.dot` — Graphviz DOT file (Tier 3)
+
+Each output file opens with an **Output Summary** block for quick scanning, followed by the full detailed output for each tier.
+
+### Output Summary
+
+```
+════════════════════════════════════════════════════════════════════════════════════
+  OUTPUT SUMMARY
+════════════════════════════════════════════════════════════════════════════════════
+Generated: 2026-05-17T10:35:11.758Z
+Output file: C:/.../sample_output_20260517_160511.txt
+Tier: all
+JSON source: ./instr_dict.json
+Manual source: ./riscv-isa-manual/src
+
+Tier 1: Instruction summary
+  Extensions: 114
+  Instruction-extension pairs: 1343
+  Shared instructions: 73
+
+Tier 2: Cross-reference summary
+  Matched extensions: 51
+  JSON-only extensions: 34
+  Manual-only extensions: 106
+
+Tier 3: Graph summary
+  Connected nodes: 32
+  Edges: 57
+  DOT file: extension_graph_20260517_160511.dot
+  Unit tests run: yes
+  Tests passed: 25
+  Tests failed: 0
+
+════════════════════════════════════════════════════════════════════════════════════
+```
 
 ### Tier 1 — Extension Summary Table
 
@@ -118,7 +113,7 @@ rv_i                  37      ADD
 rv_v                  627     VAADD_VV
 ...
 ────────────────────────────────────────────────────────────
-Total extensions: 114
+Total extensions:               114
 Total instruction-extension pairs: 1396
 ```
 
@@ -128,15 +123,13 @@ Total instruction-extension pairs: 1396
 ════════════════════════════════════════════════════════════
   Instructions Belonging to Multiple Extensions
 ════════════════════════════════════════════════════════════
-  AES32DSI
-    → rv32_zknd, rv32_zk, rv32_zkn
-  SH1ADD
-    → rv_zba, rv32_zba
-...
+  AES32DSI  →  rv32_zknd, rv32_zk, rv32_zkn
+  SH1ADD    →  rv_zba, rv32_zba
+  ...
 Total shared instructions: 73
 ```
 
-### Tier 2 — Cross-Reference
+### Tier 2 — Cross-Reference Report
 
 ```
 ══════════════════════════════════════════════════════════════════════
@@ -144,18 +137,18 @@ Total shared instructions: 73
 ══════════════════════════════════════════════════════════════════════
 
 ✔  Matched Extensions (56)
-  zba               rv_zba              Zba
-  zbb               rv_zbb              Zbb
-  ...
+   zba    rv_zba    Zba
+   zbb    rv_zbb    Zbb
+   ...
 
 ✘  In JSON only — NOT found in ISA Manual (39)
-  ssctr             (as "rv_ssctr")
-  ...
+   ssctr  (as "rv_ssctr")
+   ...
 
 ✘  In ISA Manual only — NOT found in JSON (19)
-  ...
+   ...
 
-  Summary: 56 matched,  39 in JSON only,  19 in manual only
+Summary: 56 matched,  39 in JSON only,  19 in manual only
 ```
 
 ### Tier 3 — Extension Sharing Graph
@@ -165,56 +158,55 @@ Total shared instructions: 73
     ──► rv_zbb   [ANDN, ORN, ROL … (+2 more)]
     ──► rv_zbc   [CLMUL, CLMULH]
     ──► rv_zbkb  [ANDN, ORN, PACK … (+4 more)]
-    ...
 
   Graph: 32 connected nodes,  57 edges
-  Graphviz DOT file written → ./extension_graph.dot
+  DOT file written → ./extension_graph_20260517_154903.dot
   To render: dot -Tsvg extension_graph.dot -o extension_graph.svg
 ```
+
+---
+
+## Unit Tests
+
+```bash
+node tests.js
+```
+
+20 tests covering parsing, normalisation, cross-referencing, and graph construction — no test framework required.
+
+> Tier 3 runs unit tests automatically, so you don't need to run `node tests.js` separately when using `node index.js`.
 
 ---
 
 ## Project Structure
 
 ```
-riscv-instruction-set-explorer/
-├── index.js            # Entry point & CLI
+risc-v-task/
+├── index.js             # Entry point & CLI
 ├── package.json
-├── tests.js            # 25 unit tests (no framework needed)
-├── instr_dict.json     # Input — place here
-├── riscv-isa-manual/   # Cloned ISA manual (for Tier 2)
-├── extension_graph.dot # Generated Graphviz file (Tier 3)
+├── tests.js             # 20 unit tests
+├── instr_dict.json      # Input — place here
+├── riscv-isa-manual/    # Cloned ISA manual (Tier 2)
 └── src/
-    ├── parser.js       # Tier 1: parsing & grouping
-    ├── crossref.js     # Tier 2: normalisation & cross-reference
-    └── graph.js        # Tier 3: graph building & rendering
+    ├── parser.js        # Tier 1: parsing & grouping
+    ├── crossref.js      # Tier 2: normalisation & cross-reference
+    └── graph.js         # Tier 3: graph building & DOT rendering
 ```
 
 ---
 
 ## Design Decisions
 
-### Extension normalisation (Tier 2)
-The JSON file uses prefixes like `rv_`, `rv32_`, `rv64_` (e.g. `rv_zba`, `rv64_zba`),
-while the ISA manual uses bare names like `Zba`, `M`, `F`, `RV32I`.
-The `normalise()` function strips these prefixes and lowercases everything so
-`rv_zba`, `rv32_zba`, `rv64_zba`, and `Zba` all map to the key `zba`.
+**Extension normalisation (Tier 2)**
+The JSON uses prefixes like `rv_`, `rv32_`, `rv64_` (e.g. `rv_zba`), while the ISA manual uses bare names like `Zba`, `M`, `RV32I`. The `normalise()` function strips prefixes and lowercases everything so all variants map to the same key (e.g. `zba`).
 
-### Manual scanning strategy (Tier 2)
-Rather than parsing AsciiDoc AST, the manual's `.adoc` files are scanned with a
-regex that matches:
+**Manual scanning strategy (Tier 2)**
+The `.adoc` files are scanned with a regex matching:
 - `Z[a-z][a-zA-Z0-9]{1,14}` — Z-extensions (e.g. `Zba`, `Zicsr`)
-- `RV(?:32|64)?[A-Z][A-Za-z0-9]*` — base ISA names (e.g. `RV32I`, `RVWMO`)
+- `RV(?:32|64)?[A-Z][A-Za-z0-9]*` — base ISA names (e.g. `RV32I`)
 - `[IMAFDQC]` — single-letter base ISA identifiers
 
-This is intentionally broad; it produces some false positives in "manual only"
-that represent tokens in context (author initials, acronyms, etc.).
+This is intentionally broad and may produce some false positives in the "manual only" list.
 
-### Graph (Tier 3)
-Only extensions with ≥2 shared instructions in the same mnemonic entry appear as
-nodes. Isolated extensions (all single-extension instructions) are omitted to keep
-the graph readable. A Graphviz `.dot` file is also written for visual rendering.
-
-### No external dependencies
-The entire project uses only Node.js built-in modules (`fs`, `path`, `assert`),
-making installation trivially simple.
+**Graph filtering (Tier 3)**
+Only extensions sharing ≥2 instructions appear as nodes. Isolated extensions are omitted to keep the graph readable.
